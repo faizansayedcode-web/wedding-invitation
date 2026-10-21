@@ -1,0 +1,174 @@
+:root {
+  --sage: #a9a994;
+  --sage-dark: #8f8f7a;
+  --cream: #f3efe4;
+  --gold: #c2a878;
+  --brown: #6b4a3a;
+  --brown-soft: #8a6a5a;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --script: "Great Vibes", cursive;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--serif);
+  color: var(--brown);
+  background: #5c5c4d;
+  font-size: 20px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+body.locked { overflow: hidden; }
+
+.script { font-family: var(--script); font-weight: 400; }
+.italic { font-style: italic; }
+.strong { font-weight: 700; }
+.big { font-size: 1.25em; }
+.small { font-size: .9em; }
+
+/* The invitation is a phone-width column, centered on larger screens */
+.card, .splash {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ---------- Vines ---------- */
+.vine { display: block; width: 100%; height: auto; aspect-ratio: 480 / 130; pointer-events: none; }
+.panel .vine.top, .splash .vine.top { position: absolute; top: 0; left: 0; }
+.vine.bottom, .vine.flip { transform: rotate(180deg); }
+.splash .vine.bottom { position: absolute; bottom: 0; left: 0; }
+
+/* ---------- Splash ---------- */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  background: radial-gradient(circle at 50% 40%, #bdbda9, var(--sage) 70%);
+  transition: opacity .9s ease, visibility .9s;
+  overflow: hidden;
+}
+.splash.hide { opacity: 0; visibility: hidden; }
+
+.monogram { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
+.monogram .ring {
+  position: absolute; inset: 0;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 6px rgba(194,168,120,.25);
+}
+.monogram .letters { font-family: var(--script); font-size: 62px; color: var(--brown); display: flex; align-items: center; gap: 4px; }
+.monogram small { font-family: var(--serif); font-size: 24px; color: var(--gold); }
+
+.splash-sub { letter-spacing: .3em; text-transform: uppercase; font-size: 14px; font-weight: 600; }
+.splash-names { font-size: 44px; line-height: 1.1; }
+
+.open-btn {
+  margin-top: 10px;
+  padding: 12px 30px;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--cream);
+  background: var(--brown);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  transition: transform .2s, box-shadow .2s;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+.open-btn:hover { transform: translateY(-2px); }
+@keyframes pulse { 50% { box-shadow: 0 6px 26px rgba(194,168,120,.8); } }
+
+/* ---------- Panels ---------- */
+.card { background: var(--sage); box-shadow: 0 0 60px rgba(0,0,0,.45); }
+
+.panel {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 150px 28px 90px;
+  text-align: center;
+  overflow: hidden;
+}
+.panel:nth-child(even) { background: var(--cream); }
+.panel:nth-child(odd)  { background: linear-gradient(180deg, var(--sage), #b6b6a3); }
+.panel .inner { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.panel:not(:has(.vine.top)) { padding-top: 90px; }
+
+.title { font-size: 46px; line-height: 1.15; }
+.date-line { font-weight: 700; letter-spacing: .08em; border-bottom: 1px solid var(--brown); padding-bottom: 6px; }
+
+/* Cover names stagger like the printed card */
+.names { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 18px; width: 100%; }
+.names .n1 { font-size: 58px; align-self: flex-start; }
+.names .n2 { font-size: 58px; align-self: flex-end; }
+.lotus { width: 56px; height: 36px; color: var(--brown); }
+.scroll-hint { margin-top: 24px; letter-spacing: .25em; font-size: 14px; opacity: .7; animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(6px); } }
+
+.groom, .bride { font-size: 46px; line-height: 1.1; margin-top: 10px; }
+.weds { font-size: 30px; }
+
+.serif-title { font-family: var(--serif); font-weight: 700; font-size: 38px; line-height: 1.1; }
+.rule { width: 70%; height: 6px; border-top: 2px solid var(--brown); border-bottom: 1px solid var(--brown); position: relative; }
+
+/* Programme */
+.schedule { list-style: none; width: 100%; display: flex; flex-direction: column; gap: 16px; margin-top: 10px; }
+.schedule li { display: flex; justify-content: space-between; gap: 12px; text-align: left; border-bottom: 1px dashed var(--gold); padding-bottom: 12px; font-size: 18px; }
+.schedule li span:first-child { font-weight: 700; }
+.schedule li span:last-child { text-align: right; }
+.venue { margin-top: 10px; font-size: 20px; }
+
+.map-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 28px;
+  color: var(--cream);
+  background: var(--brown);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .08em;
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  transition: transform .2s;
+}
+.map-btn:hover { transform: translateY(-2px); }
+
+/* Families */
+.families .inner { gap: 26px; }
+.families h3 { font-family: var(--script); font-weight: 400; font-size: 30px; margin-bottom: 4px; }
+.families p { font-size: 17px; }
+.two { display: grid; grid-template-columns: 1fr; gap: 22px; width: 100%; }
+@media (min-width: 380px) { .two { grid-template-columns: 1fr 1fr; gap: 18px; } }
+
+/* Closing */
+.host { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--gold); width: 100%; font-size: 18px; }
+.host a { color: inherit; text-decoration: underline; text-decoration-color: var(--gold); }
+.thanks { font-size: 56px; margin-top: 12px; }
+
+/* ---------- Reveal on scroll ---------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.inner > .reveal:nth-child(2) { transition-delay: .12s; }
+.inner > .reveal:nth-child(3) { transition-delay: .24s; }
+.inner > .reveal:nth-child(4) { transition-delay: .36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .open-btn, .scroll-hint { animation: none; }
+}
